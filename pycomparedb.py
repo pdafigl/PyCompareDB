@@ -1,18 +1,24 @@
+# Import Python libraries
+import sys
 import configparser
 
+# Import Custom fucntions
+from functions.help import *
+from functions.config import *
+
+
+# Main function
 def main():
+    # Check args
+    number_of_arguments = len(sys.argv)
+    if (number_of_arguments == 1):
+        print_help()
+
     # Charge properties values
-    config = configparser.ConfigParser()
-    config.read('pycomparedb.ini')
-    host = config['DB-SOURCE']['host']
-    port = config['DB-SOURCE']['port']
-    database = config['DB-SOURCE']['database']
-    user = config['DB-SOURCE']['user']
-    password = config['DB-SOURCE']['password']
-
-    # Print values of properties
-    print ("Valores de los parámetros de configuración:")
-    print ("Host: "+host)
-
+    source_db = {}
+    target_db = {}
+    ini_file = '../config/pycomparedb.ini'
+    get_config (source_db, target_db, ini_file)
+    
 if __name__ == "__main__":
     main()
